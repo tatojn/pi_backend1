@@ -2,6 +2,7 @@ package com.example.application.views.inicio;
 
 import org.vaadin.lineawesome.LineAwesomeIconUrl;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
@@ -45,7 +46,13 @@ public class InicioView extends VerticalLayout {
 
         
         Button  button = new Button("ingresar");
-        button.addClickListener(e -> button.getUI().ifPresent(ui -> ui.navigate("login  ")) );
+
+        button.addClickListener(e -> {
+            UI.getCurrent().navigate("CalculadoraNotas");
+
+        }
+        
+        );
         add(button);   
         
         
