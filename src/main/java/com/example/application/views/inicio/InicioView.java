@@ -22,8 +22,8 @@ public class InicioView extends VerticalLayout {
     public InicioView() {
         setSpacing(false);
 
-        Image img = new Image("images/empty-plant.png", "placeholder plant");
-        img.setWidth("200px");
+        Image img = new Image("images/imaportada.png", "portada");
+        img.setWidth("300px");
         add(img);
 
         //mensaje portada de bienvenida en la aplicacion web
