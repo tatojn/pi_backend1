@@ -1,3 +1,4 @@
+
 package com.example.application.views.inicio;
 
 import org.vaadin.lineawesome.LineAwesomeIconUrl;
@@ -8,6 +9,7 @@ import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Menu;
 import com.vaadin.flow.router.PageTitle;
@@ -23,40 +25,49 @@ public class InicioView extends VerticalLayout {
         setSpacing(false);
 
         Image img = new Image("images/imaportada.png", "portada");
-        img.setWidth("300px");
+        img.setWidth("200px");
         add(img);
 
-        //mensaje portada de bienvenida en la aplicacion web
-
-        H2 header = new H2("bienvenido al portal de notas");
+        // Mensaje portada
+        H2 header = new H2("Bienvenido al portal de notas");
         header.addClassNames(Margin.Top.XLARGE, Margin.Bottom.MEDIUM);
         add(header);
-        add(new Paragraph("debes de ingresar para poder ver tus notas en el sistema🤗"));
+        add(new Paragraph("Debes de ingresar para poder ver tus notas en el sistema🤗"));
 
         setSizeFull();
         setJustifyContentMode(JustifyContentMode.CENTER);
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
+
+        getStyle().set("background-color", "#b1cddeff");
         getStyle().set("text-align", "center");
 
-        //login del usuario para poder ingresar a la aplicacion web 
+        // Campos de login
+        TextField username = new TextField("Nombre:");
+        PasswordField password = new PasswordField("Contraseña");
+        add(username, password);
 
-        TextField username = new TextField("digite su nombre");     
-        TextField password = new TextField("ingresa tu contraseña");
-        add(username,password); 
+        // Mensaje de feedback
+        Paragraph info = new Paragraph("");
+        add(info);
 
-        
-        Button  button = new Button("ingresar");
+        Button button = new Button("Ingresar");
 
         button.addClickListener(e -> {
-            UI.getCurrent().navigate("CalculadoraNotas");
+            String user = username.getValue();
+            String pass = password.getValue();
 
-        }
-        
-        );
-        add(button);   
-        
-        
-        
+            if (user.equals("admin") && pass.equals("1234")) {
+                info.setText("✅ Bienvenido administrador");
+                UI.getCurrent().navigate("gestion-estudiantes");
+            } else if (user.equals("estudiante") && pass.equals("0000")) {
+                info.setText("✅ Bienvenido estudiante");
+                UI.getCurrent().navigate("calculadora-notas");
+            } else {
+                info.setText("❌ Usuario o contraseña incorrectos");
+            }
+        });
+
+        add(button);
     }
-
 }
+
